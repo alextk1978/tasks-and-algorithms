@@ -34,7 +34,13 @@ class TaskManager {
      * If all the queues are empty, it returns null.
      */
     public Supplier<Task> getTaskSupplier() {
-        return () -> null; // write your code here
+        Queue<Task> taskQueue = new ArrayDeque<>();
+        for (Queue<Task> arrayDeque : taskQueues) {
+            if (!arrayDeque.isEmpty()) {
+                taskQueue.addAll(arrayDeque);
+            }
+        }
+        return taskQueue::poll;
     }
 }
 
